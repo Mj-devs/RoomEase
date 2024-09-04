@@ -11,52 +11,70 @@ namespace Student_Hostel_and_Room_Booking_System
 {
 
 
-    public partial class _Default
+    public partial class AddRoom
     {
 
         /// <summary>
-        /// StudentsGridView control.
+        /// txtRoomNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StudentsGridView;
+        protected global::System.Web.UI.WebControls.TextBox txtRoomNumber;
 
         /// <summary>
-        /// btnAddStudent control.
+        /// ddlHostel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddStudent;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHostel;
 
         /// <summary>
-        /// txtSearchStudent control.
+        /// chkIsAvailable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchStudent;
+        protected global::System.Web.UI.WebControls.CheckBox chkIsAvailable;
 
         /// <summary>
-        /// btnSearchStudent control.
+        /// txtRoomType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchStudent;
+        protected global::System.Web.UI.WebControls.TextBox txtRoomType;
 
         /// <summary>
-        /// GridView1 control.
+        /// txtBedSpaces control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.TextBox txtBedSpaces;
+
+        /// <summary>
+        /// cvRoomNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvRoomNo;
+
+        /// <summary>
+        /// btnsave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnsave;
     }
 }

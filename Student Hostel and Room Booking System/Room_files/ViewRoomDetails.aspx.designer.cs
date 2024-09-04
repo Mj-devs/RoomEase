@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Student_Hostel_and_Room_Booking_System
+namespace Student_Hostel_and_Room_Booking_System.Room_files
 {
 
 
-    public partial class SiteMaster
+    public partial class ViewRoomDetails
     {
 
         /// <summary>
-        /// MainContent control.
+        /// StudentsGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.GridView StudentsGridView;
     }
 }

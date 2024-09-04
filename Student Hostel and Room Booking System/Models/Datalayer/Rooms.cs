@@ -19,6 +19,8 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
         public int? HostelId { get; set; }
         public bool IsAvailable { get; set; }
         public string RoomType { get; set; }
+        public int BedSpaces { get; set; }
+        public int AvailableBedSpaces { get; set; }
 
         public virtual Hostels Hostel { get; set; }
         public virtual ICollection<Bookings> Bookings { get; set; }

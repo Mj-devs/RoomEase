@@ -15,6 +15,24 @@ namespace Student_Hostel_and_Room_Booking_System
     {
 
         /// <summary>
+        /// txtSearchRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchRoom;
+
+        /// <summary>
+        /// btnSearchRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearchRoom;
+
+        /// <summary>
         /// RoomsGridView control.
         /// </summary>
         /// <remarks>
@@ -33,21 +51,12 @@ namespace Student_Hostel_and_Room_Booking_System
         protected global::System.Web.UI.WebControls.Button btnAddRoom;
 
         /// <summary>
-        /// txtSearchRoom control.
+        /// btnBookRoom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchRoom;
-
-        /// <summary>
-        /// btnSearchRoom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchRoom;
+        protected global::System.Web.UI.WebControls.Button btnBookRoom;
     }
 }

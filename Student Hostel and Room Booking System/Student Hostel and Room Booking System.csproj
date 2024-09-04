@@ -212,9 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="AddRoom.aspx" />
-    <Content Include="AddStudents.aspx" />
-    <Content Include="BookRoom.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Room_files\AddRoom.aspx" />
+    <Content Include="Room_files\ViewRoomDetails.aspx" />
+    <Content Include="Student_Files\AddStudents.aspx" />
+    <Content Include="Room_files\BookRoom.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -233,10 +235,11 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="ManageStudents.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Student_Files\ManageStudents.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="ManageRooms.aspx" />
+    <Content Include="Room_files\ManageRooms.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -299,18 +302,33 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRoom.aspx.cs">
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Datalayer\RoomCoordinator.cs" />
+    <Compile Include="Room_files\AddRoom.aspx.cs">
       <DependentUpon>AddRoom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddRoom.aspx.designer.cs">
+    <Compile Include="Room_files\AddRoom.aspx.designer.cs">
       <DependentUpon>AddRoom.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AddStudents.aspx.cs">
+    <Compile Include="Room_files\ViewRoomDetails.aspx.cs">
+      <DependentUpon>ViewRoomDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Room_files\ViewRoomDetails.aspx.designer.cs">
+      <DependentUpon>ViewRoomDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Files\AddStudents.aspx.cs">
       <DependentUpon>AddStudents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddStudents.aspx.designer.cs">
+    <Compile Include="Student_Files\AddStudents.aspx.designer.cs">
       <DependentUpon>AddStudents.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -322,11 +340,11 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BookRoom.aspx.cs">
+    <Compile Include="Room_files\BookRoom.aspx.cs">
       <DependentUpon>BookRoom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BookRoom.aspx.designer.cs">
+    <Compile Include="Room_files\BookRoom.aspx.designer.cs">
       <DependentUpon>BookRoom.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
@@ -336,21 +354,28 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ManageStudents.aspx.cs">
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Files\ManageStudents.aspx.cs">
       <DependentUpon>ManageStudents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManageStudents.aspx.designer.cs">
+    <Compile Include="Student_Files\ManageStudents.aspx.designer.cs">
       <DependentUpon>ManageStudents.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ManageRooms.aspx.cs">
+    <Compile Include="Room_files\ManageRooms.aspx.cs">
       <DependentUpon>ManageRooms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManageRooms.aspx.designer.cs">
+    <Compile Include="Room_files\ManageRooms.aspx.designer.cs">
       <DependentUpon>ManageRooms.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Datalayer\Bookings.cs" />

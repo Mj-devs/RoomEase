@@ -10,17 +10,40 @@ namespace Student_Hostel_and_Room_Booking_System
 {
     public partial class _Default : Page
     {
-            protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            {    // Retrieving the RoomCoordinatoor Id from the session
+                if (Session["RoomCoordinatorId"] != null)
+                {
+                    int RoomCoordinatorId = (int)Session["RoomCoordinatorId"];
+
+                    using (var context = new StudentHostelDBContext())
+                    {
+                        var RoomCoordinator = context.RoomCoordinator.Where(r => RoomCoordinatorId == r.RoomCoordinatorId).FirstOrDefault();
+
+
+                        if (RoomCoordinator != null)
+                        {
+                        }
+                        else
+                        {
+                            lblMessage.Text = "Lecturer not found.";
+                        }
+                    }
+                }
+                else
+                {
+                    // Case where session is null (redirect to login page)
+                    Response.Redirect("~/Login.aspx");
+                }
                 BindStudentsGrid();
             }
         }
 
         private void BindStudentsGrid()
         {
-            using (var context = new StudentHostelDbContext())
+            using (var context = new StudentHostelDBContext())
             {
                 var students = context.Students.ToList();
                 StudentsGridView.DataSource = students;
@@ -45,16 +68,16 @@ namespace Student_Hostel_and_Room_Booking_System
             int studentId = Convert.ToInt32(StudentsGridView.DataKeys[e.RowIndex].Value);
             GridViewRow row = StudentsGridView.Rows[e.RowIndex];
 
-            string name = (row.FindControl("txtName") as TextBox).Text;
-            string email = (row.FindControl("txtEmail") as TextBox).Text;
-            string phoneNumber = (row.FindControl("txtPhoneNumber") as TextBox).Text;
+            TextBox name = (TextBox)(row.Cells[1].Controls[0]);
+            TextBox email = (TextBox)(row.Cells[2].Controls[0]);
+            TextBox phoneNumber = (TextBox)(row.Cells[3].Controls[0]);
 
-            using (var context = new StudentHostelDbContext())
+            using (var context = new StudentHostelDBContext())
             {
                 var student = context.Students.Find(studentId);
-                student.Name = name;
-                student.Email = email;
-                student.PhoneNumber = phoneNumber;
+                student.Name = name.Text;
+                student.MatricNo = email.Text;
+                student.PhoneNumber = phoneNumber.Text;
 
                 context.SaveChanges();
             }
@@ -67,7 +90,7 @@ namespace Student_Hostel_and_Room_Booking_System
         {
             int studentId = Convert.ToInt32(StudentsGridView.DataKeys[e.RowIndex].Value);
 
-            using (var context = new StudentHostelDbContext())
+            using (var context = new StudentHostelDBContext())
             {
                 var student = context.Students.Find(studentId);
                 context.Students.Remove(student);
@@ -79,16 +102,16 @@ namespace Student_Hostel_and_Room_Booking_System
 
         protected void btnAddStudent_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddStudents.aspx");
+            Response.Redirect("/Student_Files/AddStudents.aspx");
         }
 
         protected void btnSearchStudent_Click(object sender, EventArgs e)
         {
-            using (var context = new StudentHostelDbContext())
+            using (var context = new StudentHostelDBContext())
             {
                 string searchQuery = txtSearchStudent.Text.ToLower();
                 var students = context.Students
-                    .Where(s => s.Name.ToLower().Contains(searchQuery) || s.Email.ToLower().Contains(searchQuery))
+                    .Where(s => s.Name.ToLower().Contains(searchQuery) || s.MatricNo.ToLower().Contains(searchQuery))
                     .ToList();
 
                 StudentsGridView.DataSource = students;

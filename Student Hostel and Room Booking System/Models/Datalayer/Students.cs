@@ -16,10 +16,12 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
 
         public int StudentId { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
+        public string MatricNo { get; set; }
         public string PhoneNumber { get; set; }
+        public string JambRegNo { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Gender { get; set; }
+        public string Level { get; set; }
 
         public virtual ICollection<Bookings> Bookings { get; set; }
     }
