@@ -14,7 +14,30 @@ namespace Student_Hostel_and_Room_Booking_System
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            {    // Retrieving the RoomCoordinatoor Id from the session
+                if (Session["RoomCoordinatorId"] != null)
+                {
+                    int RoomCoordinatorId = (int)Session["RoomCoordinatorId"];
+
+                    using (var context = new StudentHostelDBContext())
+                    {
+                        var RoomCoordinator = context.RoomCoordinator.Where(r => RoomCoordinatorId == r.RoomCoordinatorId).FirstOrDefault();
+                        if (RoomCoordinator != null)
+                        {
+                            lbluser.Text = $"User that is signed in: {RoomCoordinator.Username}";
+                        }
+                        else
+                        {
+                            // Handle the case where the RoomCoordinator is not found
+                            lbluser.Text = "Coordinator not found";
+                        }
+                    }
+                }
+                else
+                {
+                    // Case where session is null (redirect to login page)
+                    Response.Redirect("~/Login.aspx");
+                }
                 BindRoomsGrid();
             }
         }
@@ -47,7 +70,7 @@ namespace Student_Hostel_and_Room_Booking_System
             GridViewRow row = RoomsGridView.Rows[e.RowIndex];
 
             // Retrieve controls from the GridView row
-            TextBox roomNumber = (TextBox)(row.Cells[1].Controls[0]);
+            //TextBox roomNumber = (TextBox)(row.Cells[1].Controls[0]);
             int hostelId = int.Parse((row.FindControl("ddlHostel") as DropDownList).SelectedValue);
             TextBox roomType = (TextBox)(row.Cells[3].Controls[0]);
             TextBox bedSpacesTextBox = (TextBox)(row.Cells[4].Controls[0]);
@@ -70,7 +93,7 @@ namespace Student_Hostel_and_Room_Booking_System
                     room.AvailableBedSpaces += (newBedSpaces - room.BedSpaces);
                 }
 
-                room.RoomNumber = roomNumber.Text;
+               //room.RoomNumber = roomNumber.Text;
                 room.HostelId = hostelId;
                 room.BedSpaces = newBedSpaces;
                 room.AvailableBedSpaces = currentAvailableBedSpaces;

@@ -15,6 +15,15 @@ namespace Student_Hostel_and_Room_Booking_System.Room_files
     {
 
         /// <summary>
+        /// lblRoomNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRoomNumber;
+
+        /// <summary>
         /// StudentsGridView control.
         /// </summary>
         /// <remarks>

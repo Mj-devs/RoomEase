@@ -24,6 +24,7 @@ namespace Student_Hostel_and_Room_Booking_System
                 var coordinator = context.RoomCoordinator
                     .SingleOrDefault(c => c.Username == username);
 
+                    // Validator to enter RoomEase
                 if (coordinator != null && VerifyPassword(password, coordinator.PasswordHash))
                 {
                     // Store user information in session
@@ -31,7 +32,7 @@ namespace Student_Hostel_and_Room_Booking_System
                     Session["Username"] = coordinator.Username;
 
                     // Redirect to the room booking page
-                    Response.Redirect("/Student_Files/ManageStudents");
+                    Response.Redirect("~/Dashboard");
                 }
                 else
                 {
@@ -40,11 +41,11 @@ namespace Student_Hostel_and_Room_Booking_System
             }
         }
 
-        // Method to verify password (example, should be replaced with actual hashing verification)
+        // Method to verify password
         private bool VerifyPassword(string password, string hashedPassword)
         {
             // Implement password verification logic
-            return password == hashedPassword; // Replace with actual hash comparison
+            return password == hashedPassword; 
         }
 
     }

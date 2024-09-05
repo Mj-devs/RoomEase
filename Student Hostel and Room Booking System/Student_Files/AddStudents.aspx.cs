@@ -14,11 +14,33 @@ namespace Student_Hostel_and_Room_Booking_System
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                if (Request.QueryString["StudentId"] != null)
+            {    // Retrieving the RoomCoordinatoor Id from the session
+                if (Session["RoomCoordinatorId"] != null)
                 {
-                    int studentId = int.Parse(Request.QueryString["StudentId"]);
-                    LoadStudentDetails(studentId);
+                    int RoomCoordinatorId = (int)Session["RoomCoordinatorId"];
+
+                    using (var context = new StudentHostelDBContext())
+                    {
+                        var RoomCoordinator = context.RoomCoordinator.Where(r => RoomCoordinatorId == r.RoomCoordinatorId).FirstOrDefault();
+
+
+                        if (RoomCoordinator != null)
+                        {
+                            if (Request.QueryString["StudentId"] != null)
+                            {
+                                int studentId = int.Parse(Request.QueryString["StudentId"]);
+                                LoadStudentDetails(studentId);
+                            }
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+                else
+                {
+                    // Case where session is null (redirect to login page)
+                    Response.Redirect("~/Login.aspx");
                 }
             }
         }
@@ -49,6 +71,7 @@ namespace Student_Hostel_and_Room_Booking_System
                 }
                 else
                 {
+                    //Add Student to database
                     student = new Students();
                     context.Students.Add(student);
                 }
@@ -114,6 +137,7 @@ namespace Student_Hostel_and_Room_Booking_System
                     context.Students.Add(student);
                 }
 
+                // Add Fresher to database
                 student.Name = txtname.Text;
                 student.MatricNo = txtmatricno.Text;
                 student.PhoneNumber = txtphonenumber.Text;

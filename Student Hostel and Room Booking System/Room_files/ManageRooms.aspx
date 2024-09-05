@@ -10,6 +10,10 @@
         </div>
     </header>
     <br />
+
+    <asp:Label ID="lbluser" Text="" runat="server" CssClass="text-primary" /><br />
+
+    <!--Show rooms in grid view-->
     <asp:GridView ID="RoomsGridView" runat="server" AutoGenerateColumns="False" DataKeyNames="RoomId"
     OnRowEditing="RoomsGridView_RowEditing" OnRowCancelingEdit="RoomsGridView_RowCancelingEdit"
     OnRowUpdating="RoomsGridView_RowUpdating" OnRowDeleting="RoomsGridView_RowDeleting"
@@ -21,7 +25,12 @@
         <%# Container.DataItemIndex + 1 %>
     </ItemTemplate>
     </asp:TemplateField>
-        <asp:BoundField DataField="RoomNumber" HeaderText="Room Number" />
+        <asp:TemplateField HeaderText="Room Number" SortExpression="RoomNumber">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkRoomNumber" runat="server" Text='<%# Eval("RoomNumber") %>' 
+                    CommandArgument='<%# Eval("RoomId") %>' OnClick="lnkRoomNumber_Click" />
+            </ItemTemplate>
+        </asp:TemplateField>
         <asp:TemplateField HeaderText="Hostel">
             <ItemTemplate>
                 <asp:Label ID="lblHostelName" runat="server" Text='<%# Eval("Hostel.HostelName") %>'></asp:Label>
@@ -41,6 +50,7 @@
     </Columns>
     </asp:GridView>
     
+    <!--Buttons to either Add New Room or to Book Room-->
     <asp:Button ID="btnAddRoom" runat="server" Text="Add New Room" OnClick="btnAddRoom_Click" CssClass="btn btn-outline-primary" />
     <asp:Button ID="btnBookRoom" runat="server" Text="Book Room" OnClick="btnBookRoom_Click" CssClass="btn btn-primary ms-2" />
 

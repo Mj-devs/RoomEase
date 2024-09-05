@@ -14,6 +14,13 @@ namespace Student_Hostel_and_Room_Booking_System.Room_files
         {
             if (!IsPostBack)
             {
+                // Retrieve the room number from the session
+                string roomNumber = Session["SelectedRoomNumber"] as string;
+                if (!string.IsNullOrEmpty(roomNumber))
+                {
+                    lblRoomNumber.Text = $"Details for Room: {roomNumber}";
+                }
+
                 string roomId = Request.QueryString["RoomId"];
                 if (!string.IsNullOrEmpty(roomId))
                 {
@@ -33,7 +40,6 @@ namespace Student_Hostel_and_Room_Booking_System.Room_files
                         b.Student.StudentId,
                         StudentName = b.Student.Name + " " + b.Student.MatricNo,
                         b.CheckInDate,
-                        b.CheckOutDate
                     })
                     .ToList();
 
@@ -41,6 +47,7 @@ namespace Student_Hostel_and_Room_Booking_System.Room_files
                 StudentsGridView.DataBind();
             }
         }
+
 
     }
 }
