@@ -27,7 +27,7 @@ namespace Student_Hostel_and_Room_Booking_System
                         if (RoomCoordinator != null)
                         {
                              LoadStudents();
-                            BindStudentsGrid();
+
                         }
                         else
                         {
@@ -45,12 +45,14 @@ namespace Student_Hostel_and_Room_Booking_System
             }
         }
 
-        private void BindStudentsGrid()
+
+        private void LoadStudents()
         {
             using (var context = new StudentHostelDBContext())
             {
-                // Retrieve student data along with active room and hostel information
-                var students = context.Students
+                // Query for returning students (level 200 and above)
+                var returningStudents = context.Students
+                    .Where(s =>  s.MatricNo != "N/A" && !string.IsNullOrEmpty(s.MatricNo))
                     .Select(s => new
                     {
                         s.StudentId,
@@ -58,8 +60,33 @@ namespace Student_Hostel_and_Room_Booking_System
                         s.MatricNo,
                         s.PhoneNumber,
                         s.Gender,
+                        s.Department,
+
+                        // Get the room number and hostel name for the active booking
+                        RoomNumber = s.Bookings
+                        .Where(b => b.CheckOutDate == null)
+                        .Select(b => b.Room.RoomNumber)
+                        .FirstOrDefault() ?? "Not Assigned",
+                        HostelName = s.Bookings
+                        .Where(b => b.CheckOutDate == null)
+                        .Select(b => b.Room.Hostel.HostelName)
+                        .FirstOrDefault() ?? "Not Assigned"
+                    })
+                    .ToList();
+
+                // Query for new students (level 100 or having JAMB registration number)
+                var newStudents = context.Students
+                    .Where(s => s.Level == 100.ToString() || s.JambRegNo != null)
+                    .Select(s => new
+                    {
+                        s.StudentId,
+                        s.Name,
+                        s.PhoneNumber,
+                        s.Gender,
                         s.Level,
                         s.Department,
+                        s.JambRegNo,
+
                         // Get the room number and hostel name for the active booking (if available)
                         RoomNumber = s.Bookings
                         .Where(b => b.CheckOutDate == null)
@@ -72,48 +99,16 @@ namespace Student_Hostel_and_Room_Booking_System
                     })
                     .ToList();
 
-                // Bind the result to the GridView
-                StudentsGridView.DataSource = students;
+                // Bind returning students to the ReturningStudentsGridView
+                StudentsGridView.DataSource = returningStudents;
                 StudentsGridView.DataBind();
+
+                // Bind new students to the NewStudentsGridView
+                NewStudentsGridView.DataSource = newStudents;
+                NewStudentsGridView.DataBind();
             }
         }
 
-        private void LoadStudents()
-        {
-            using (var context = new StudentHostelDBContext())
-            {
-                // Include Bookings and Room with its related Hostel data
-                var students = context.Students
-                    .Include(s => s.Bookings)  // Include the Bookings related to Students
-                    .ThenInclude(b => b.Room)  // Include the Room related to each Booking
-                    .ThenInclude(r => r.Hostel)  // Include the Hostel related to each Room
-                    .Select(s => new
-                    {
-                        s.StudentId,
-                        s.Name,
-                        s.MatricNo,
-                        s.PhoneNumber,
-                        s.Gender,
-                        s.Level,
-                        s.Department,
-                        // Get the room number and hostel name for the active booking (if available)
-                         RoomNumber = s.Bookings
-                        .Where(b => b.CheckOutDate == null)
-                        .Select(b => b.Room.RoomNumber)
-                        .FirstOrDefault() ?? "Not Assigned",
-                         HostelName = s.Bookings
-                        .Where(b => b.CheckOutDate == null)
-                        .Select(b => b.Room.Hostel.HostelName)
-                        .FirstOrDefault() ?? "Not Assigned"
-
-                    })
-                    .ToList();
-
-                // Bind the result to the GridView
-                StudentsGridView.DataSource = students;
-                StudentsGridView.DataBind();
-            }
-        }
 
         protected void StudentsGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -134,6 +129,7 @@ namespace Student_Hostel_and_Room_Booking_System
         {
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) > 0)
             {
+                // Find the DropDownList control for departments
                 DropDownList ddlDepartment = (DropDownList)e.Row.FindControl("ddlDepartment");
 
                 using (var context = new StudentHostelDBContext())
@@ -144,15 +140,24 @@ namespace Student_Hostel_and_Room_Booking_System
                     ddlDepartment.DataValueField = "DepartmentId";
                     ddlDepartment.DataBind();
 
-                    // Set the selected value based on the student's department
-                    var student = (Students)e.Row.DataItem;
-                    if (student != null)
+                    // Extract the DataItem as an anonymous type
+                    var dataItem = e.Row.DataItem;
+
+                    // Use reflection to access the DepartmentId from the anonymous type
+                    var departmentProperty = dataItem.GetType().GetProperty("Department");
+                    if (departmentProperty != null)
                     {
-                       ddlDepartment.SelectedValue = student.DepartmentId.ToString();
+                        var department = departmentProperty.GetValue(dataItem) as Department;
+
+                        if (department != null)
+                        {
+                            ddlDepartment.SelectedValue = department.DepartmentId.ToString();
+                        }
                     }
                 }
             }
         }
+
         // This method is triggered when the user clicks the "Edit" button in a row in the StudentsGridView.
         protected void StudentsGridView_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -160,7 +165,7 @@ namespace Student_Hostel_and_Room_Booking_System
             StudentsGridView.EditIndex = e.NewEditIndex;
 
             // Rebind the GridView to display it in edit mode for the selected row.
-            BindStudentsGrid();
+            LoadStudents();
         }
 
         // This method is triggered when the user clicks the "Cancel" button while editing a row.
@@ -170,7 +175,7 @@ namespace Student_Hostel_and_Room_Booking_System
             StudentsGridView.EditIndex = -1;
 
             // Rebind the GridView to cancel editing and restore the grid to its normal view.
-            BindStudentsGrid();
+            LoadStudents();
         }
 
         // This method is triggered when the user updates a row after editing.
@@ -210,8 +215,8 @@ namespace Student_Hostel_and_Room_Booking_System
             StudentsGridView.EditIndex = -1;
 
             // Rebind the GridView to reflect the updated data.
-            BindStudentsGrid();
-        }
+                LoadStudents();
+            }
 
         // This method is triggered when the user deletes a row.
         protected void StudentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -248,7 +253,7 @@ namespace Student_Hostel_and_Room_Booking_System
                 }
             }
             // Rebind the GridView to reflect the deletion.
-            BindStudentsGrid();
+            LoadStudents();
         }
 
         protected void ErrorTimer_Tick(object sender, EventArgs e)

@@ -59,7 +59,6 @@ namespace Student_Hostel_and_Room_Booking_System
                     {
                         s.StudentId,
                         s.Name,
-                        s.MatricNo
                     })
                     .ToList();
 

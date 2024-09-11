@@ -144,10 +144,14 @@ namespace Student_Hostel_and_Room_Booking_System
 
                 // Update the student's properties with values from the form fields.
                 student.Name = txtname.Text.Trim();
-                student.MatricNo = txtmatricno.Text.Trim();
                 student.PhoneNumber = txtphonenumber.Text.Trim();
                 student.Gender = ddlGender.SelectedValue;
                 student.Level = txtlevel.Text.Trim();
+
+                if (string.IsNullOrEmpty(student.MatricNo))
+                {
+                    student.MatricNo = "N/A";  // Placeholder value until MatricNo is generated
+                }
 
                 // Retrieve the Department object based on the selected value from dropdown.
                 int departmentId = int.Parse(ddlDepartment.SelectedValue);
@@ -264,7 +268,6 @@ namespace Student_Hostel_and_Room_Booking_System
 
                 // Add Fresher to database
                 student.Name = txtname.Text;
-                student.MatricNo = txtmatricno.Text;
                 student.PhoneNumber = txtphonenumber.Text;
                 student.JambRegNo = txtjambno.Text;
                 student.Gender = ddlGender.Text;

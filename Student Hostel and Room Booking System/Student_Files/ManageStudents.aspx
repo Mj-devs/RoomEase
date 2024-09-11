@@ -17,6 +17,7 @@
     <br />
 
     <div>
+    <h5 class="text-secondary">Here is the list of returning students</h5>
         <!--GridView for returning students-->
     <asp:GridView ID="StudentsGridView" runat="server" AutoGenerateColumns="False" DataKeyNames="StudentId"
     OnRowEditing="StudentsGridView_RowEditing" OnRowCancelingEdit="StudentsGridView_RowCancelingEdit"
@@ -44,7 +45,26 @@
             <asp:BoundField DataField="RoomNumber" HeaderText="Assigned Room" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
             <asp:BoundField DataField="HostelName" HeaderText="Assigned Hostel" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
 
-            <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+            <%--<asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />--%>
+        </Columns>
+    </asp:GridView>
+
+    <h5 class="text-secondary">Here is the list of new students (freshers)</h5>
+    <asp:GridView ID="NewStudentsGridView" runat="server" AutoGenerateColumns="False" 
+                  CssClass="table table-bordered table-striped">
+    <Columns>
+            <asp:TemplateField HeaderText="S/N" ItemStyle-Width="50px">
+                <ItemTemplate>
+                    <%# Container.DataItemIndex + 1 %>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="Name" HeaderText="Name" />
+            <asp:BoundField DataField="Department" HeaderText="Department" />
+            <asp:BoundField DataField="JambRegNo" HeaderText="JAMB Reg No" /> 
+            <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" />
+            <asp:BoundField DataField="Gender" HeaderText="Gender" />
+            <asp:BoundField DataField="RoomNumber" HeaderText="Assigned Room" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
+            <asp:BoundField DataField="HostelName" HeaderText="Assigned Hostel" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
         </Columns>
     </asp:GridView>
 
@@ -57,7 +77,7 @@
 
         <!--button add student-->
     <asp:Button ID="btnAddStudent" runat="server" Text="Add New Student" OnClick="btnAddStudent_Click" CssClass="btn btn-outline-primary" />
-    <asp:Button ID="btnBookRoom" runat="server" Text="Book A Room" OnClick="btnBookStudent_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnBookRoom" runat="server" Text="Assingn Room" OnClick="btnBookStudent_Click" CssClass="btn btn-primary" />
     </div>
 
 </asp:Content>

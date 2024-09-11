@@ -51,6 +51,15 @@ namespace Student_Hostel_and_Room_Booking_System
         protected global::System.Web.UI.WebControls.GridView StudentsGridView;
 
         /// <summary>
+        /// NewStudentsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView NewStudentsGridView;
+
+        /// <summary>
         /// updatepanel1 control.
         /// </summary>
         /// <remarks>
