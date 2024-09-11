@@ -22,9 +22,6 @@ RoomEase is a comprehensive Student Hostel and Room Management System designed t
 ### Session-Based Management
 - **Secure Data Handling**: Use session management to handle data securely and persist across different actions.
 
-### Reporting & Printing
-- **Custom Reports**: Generate reports on room assignments, hostel availability, and daily bookings.
-- **Print Details**: Print student room details and other relevant information.
 
 ### Error Handling & Validation
 - **Detailed Error Messages**: Handle errors gracefully and provide informative messages.
