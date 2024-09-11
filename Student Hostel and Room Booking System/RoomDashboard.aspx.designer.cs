@@ -11,88 +11,61 @@ namespace Student_Hostel_and_Room_Booking_System
 {
 
 
-    public partial class _Default
+    public partial class RoomDashboard
     {
 
         /// <summary>
-        /// lblMessage control.
+        /// lblTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
 
         /// <summary>
-        /// txtSearchStudent control.
+        /// lblSelectDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchStudent;
+        protected global::System.Web.UI.WebControls.Label lblSelectDate;
 
         /// <summary>
-        /// btnSearchStudent control.
+        /// txtSelectedDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchStudent;
+        protected global::System.Web.UI.WebControls.TextBox txtSelectedDate;
 
         /// <summary>
-        /// StudentsGridView control.
+        /// btnFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StudentsGridView;
+        protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
-        /// updatepanel1 control.
+        /// BookingsGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatepanel1;
+        protected global::System.Web.UI.WebControls.GridView BookingsGridView;
 
         /// <summary>
-        /// lblErrorMessage control.
+        /// lblNoBookings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorMessage;
-
-        /// <summary>
-        /// ErrorTimer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer ErrorTimer;
-
-        /// <summary>
-        /// btnAddStudent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddStudent;
-
-        /// <summary>
-        /// btnBookRoom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBookRoom;
+        protected global::System.Web.UI.WebControls.Label lblNoBookings;
     }
 }

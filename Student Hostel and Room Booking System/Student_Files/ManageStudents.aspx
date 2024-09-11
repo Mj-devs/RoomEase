@@ -3,7 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <header class="d-flex justify-content-between align-items-center">
         <div>
-            <h2 id="title">Student's List</h2>
+            <h2 id="title">Assigned Student's List</h2>
+            <h5 class="text-primary">Here is the list of students which have been assigned or yet to be assigned rooms</h5>
             <asp:Label ID="lblMessage" Text="" runat="server" />
         </div>
 
@@ -16,10 +17,12 @@
     <br />
 
     <div>
-        <!--GridView-->
+        <!--GridView for returning students-->
     <asp:GridView ID="StudentsGridView" runat="server" AutoGenerateColumns="False" DataKeyNames="StudentId"
     OnRowEditing="StudentsGridView_RowEditing" OnRowCancelingEdit="StudentsGridView_RowCancelingEdit"
-    OnRowUpdating="StudentsGridView_RowUpdating" OnRowDeleting="StudentsGridView_RowDeleting" CssClass="table table-bordered table-striped table-hover">
+    OnRowUpdating="StudentsGridView_RowUpdating" OnRowDeleting="StudentsGridView_RowDeleting" 
+    OnRowDataBound="StudentsGridView_RowDataBound" OnRowCommand="StudentsGridView_RowCommand"
+    CssClass="table table-bordered table-striped table-hover">
         <Columns>
             <asp:TemplateField HeaderText="S/N" ItemStyle-Width="50px">
             <ItemTemplate>
@@ -28,12 +31,33 @@
         </asp:TemplateField>
             <asp:BoundField DataField="Name" HeaderText="Name" />
             <asp:BoundField DataField="MatricNo" HeaderText="Matric Number" />
+            <asp:TemplateField HeaderText="Department">
+            <EditItemTemplate>
+                <asp:DropDownList ID="ddlDepartment" runat="server" DataTextField="DepartmentName" DataValueField="DepartmentId"></asp:DropDownList>
+            </EditItemTemplate>
+            <ItemTemplate>
+                <%# Eval("Department.DepartmentName") %>
+            </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="Gender" HeaderText="Gender" />
             <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" />
+            <asp:BoundField DataField="RoomNumber" HeaderText="Assigned Room" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
+            <asp:BoundField DataField="HostelName" HeaderText="Assigned Hostel" ReadOnly="True" ItemStyle-CssClass="gridview-cell" />
+
             <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>
-        <!--Button Add Student-->
-    <asp:Button ID="btnAddStudent" runat="server" Text="Add New Student" OnClick="btnAddStudent_Click" CssClass="btn btn-primary" />
+
+        <asp:updatepanel id="updatepanel1" runat="server">
+            <contenttemplate>
+                <asp:label id="lblErrorMessage" runat="server" forecolor="red" cssclass="error-message" visible="false"></asp:label>
+                <asp:timer id="ErrorTimer" runat="server" interval="5000" ontick="ErrorTimer_Tick" />
+            </contenttemplate>
+        </asp:updatepanel>
+
+        <!--button add student-->
+    <asp:Button ID="btnAddStudent" runat="server" Text="Add New Student" OnClick="btnAddStudent_Click" CssClass="btn btn-outline-primary" />
+    <asp:Button ID="btnBookRoom" runat="server" Text="Book A Room" OnClick="btnBookStudent_Click" CssClass="btn btn-primary" />
     </div>
 
 </asp:Content>

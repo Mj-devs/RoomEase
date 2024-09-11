@@ -1,4 +1,5 @@
-﻿using Student_Hostel_and_Room_Booking_System.Models.Datalayer;
+﻿using Microsoft.EntityFrameworkCore;
+using Student_Hostel_and_Room_Booking_System.Models.Datalayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,6 @@ namespace Student_Hostel_and_Room_Booking_System
                     {
                         var RoomCoordinator = context.RoomCoordinator.Where(r => RoomCoordinatorId == r.RoomCoordinatorId).FirstOrDefault();
 
-
                         if (RoomCoordinator != null)
                         {
                             if (Request.QueryString["StudentId"] != null)
@@ -31,6 +31,7 @@ namespace Student_Hostel_and_Room_Booking_System
                                 int studentId = int.Parse(Request.QueryString["StudentId"]);
                                 LoadStudentDetails(studentId);
                             }
+                                LoadDepartmemnts();
                         }
                         else
                         {
@@ -58,31 +59,146 @@ namespace Student_Hostel_and_Room_Booking_System
                 }
             }
         }
-
-        protected void btnsave_Click(object sender, EventArgs e)
+        private void LoadDepartmemnts()
         {
             using (var context = new StudentHostelDBContext())
             {
+                var departments = context.Department.ToList();
+
+                ddlDepartment.DataSource = departments;
+                ddlDepartment.DataTextField = "DepartmentName";
+                ddlDepartment.DataValueField = "DepartmentId";
+                ddlDepartment.DataBind();
+            }
+
+            ddlDepartment.Items.Insert(0, new ListItem("--Select Department--", "0"));
+        }
+        protected void btnsave_Click(object sender, EventArgs e)
+        {
+            // Initialize a variable to track if validation passes.
+            bool isValid = true;
+
+            // Clear any previous error messages.
+            lblMessage.Text = string.Empty;
+
+            // Check if all required fields are filled.
+            if (string.IsNullOrWhiteSpace(txtname.Text))
+            {
+                lblMessage.Text += "Name is required. ";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtmatricno.Text))
+            {
+                lblMessage.Text += "Matriculation number is required. ";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtphonenumber.Text))
+            {
+                lblMessage.Text += "Phone number is required. ";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtlevel.Text))
+            {
+                lblMessage.Text += "Level is required. ";
+                isValid = false;
+            }
+
+            if (ddlDepartment.SelectedIndex == 0)
+            {
+                lblMessage.Text += "Please select a department. ";
+                isValid = false;
+            }
+
+            // If validation fails, do not proceed with saving.
+            if (!isValid)
+            {
+                return; // Exit the method if any validation fails.
+            }
+
+            using (var context = new StudentHostelDBContext())
+            {
                 Students student;
+
+                // Check if "StudentId" exists in the query string.
                 if (Request.QueryString["StudentId"] != null)
                 {
                     int studentId = int.Parse(Request.QueryString["StudentId"]);
                     student = context.Students.Find(studentId);
+
+                    // If the student is not found, handle the case (optional).
+                    if (student == null)
+                    {
+                        lblMessage.Text = "Student not found.";
+                        return; // Exit the method if no student is found.
+                    }
                 }
                 else
                 {
-                    //Add Student to database
+                    // Create a new student if no StudentId is provided.
                     student = new Students();
                     context.Students.Add(student);
                 }
 
-                student.Name = txtname.Text;
-                student.MatricNo = txtmatricno.Text;
-                student.PhoneNumber = txtphonenumber.Text;
+                // Update the student's properties with values from the form fields.
+                student.Name = txtname.Text.Trim();
+                student.MatricNo = txtmatricno.Text.Trim();
+                student.PhoneNumber = txtphonenumber.Text.Trim();
+                student.Gender = ddlGender.SelectedValue;
+                student.Level = txtlevel.Text.Trim();
 
-                context.SaveChanges();
-                Response.Redirect("ManageStudents.aspx");
+                // Retrieve the Department object based on the selected value from dropdown.
+                int departmentId = int.Parse(ddlDepartment.SelectedValue);
+                var department = context.Department.Find(departmentId);
+
+                // Assign the Department object to the student.
+                if (department != null)
+                {
+                    student.Department = department;
+                }
+                else
+                {
+                    lblMessage.Text = "Selected department not found.";
+                    lblMessage.Visible = true;
+                    return; // Exit the method if the department is not found.
+                }
+
+                try
+                {
+                    // Save changes to the database.
+                    context.SaveChanges();
+
+                    // Redirect to ManageStudents.aspx after successfully saving.
+                    Response.Redirect("ManageStudents.aspx");
+                }
+                catch (DbUpdateException ex)
+                {
+                    // Check for unique constraint violation.
+                    if (ex.InnerException != null && ex.InnerException.Message.Contains("UQ__Students__8E55BF888B1A263A"))
+                    {
+                        lblMessage.Text = "A student with this matriculation number already exists." + Environment.NewLine + "Please use a different matriculation number.";
+                        lblMessage.Visible = true;
+
+                        // Reset and start the timer
+                        ErrorTimer.Enabled = true;
+                    }
+                    else
+                    {
+                        // General error message for other exceptions.
+                        lblMessage.Text = "An error occurred while saving the student. Please try again later.";
+                    }
+                }
             }
+        }
+
+        protected void ErrorTimer_Tick(object sender, EventArgs e)
+        {
+            lblMessage.Visible = false; 
+            
+            // Hide the error message
+            ErrorTimer.Enabled = false;
         }
 
         protected void lbToggleFields_Click(object sender, EventArgs e)
@@ -94,6 +210,15 @@ namespace Student_Hostel_and_Room_Booking_System
             btnsave.Visible = !btnsave.Visible;
 
             pnlTextBoxContainer.Visible = !pnlTextBoxContainer.Visible;
+
+            if (pnlHiddenFields.Visible)
+            {
+                lbToggleFields.Text = "Add Existing Student +";
+            }
+            else
+            {
+                lbToggleFields.Text = "Add Fresher +";
+            }
         }
 
         protected void cvMatricNo_ServerValidate(object source, ServerValidateEventArgs args)
@@ -142,11 +267,26 @@ namespace Student_Hostel_and_Room_Booking_System
                 student.MatricNo = txtmatricno.Text;
                 student.PhoneNumber = txtphonenumber.Text;
                 student.JambRegNo = txtjambno.Text;
-                student.Gender = txtgender.Text;
+                student.Gender = ddlGender.Text;
 
                 context.SaveChanges();
-                Response.Redirect("/Student_Files/ManageStudents.aspx");
+                ClearForm();
             }
+        }
+        protected void ClearForm()
+        {
+            txtname.Text = string.Empty;
+            txtlevel.Text = string.Empty;
+            txtmatricno.Text = string.Empty;
+            txtphonenumber.Text = string.Empty;
+            txtjambno.Text = string.Empty;
+            txtdob.Text=string.Empty;
+            ddlGender.Text = string.Empty;
+        }
+        protected void btnBackToStudents_Click(object sender, EventArgs e)
+        {
+            // Redirect back to the Room management page
+            Response.Redirect("/Student_Files/ManageStudents.aspx");
         }
     }
 }

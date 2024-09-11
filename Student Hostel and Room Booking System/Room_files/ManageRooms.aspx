@@ -3,6 +3,7 @@
     <header class="d-flex justify-content-between align-items-center">
     <div>
         <h2 id="title">Rooms List</h2>
+        <h5 class="text-secondary"> See available rooms list and students assigned to them</h5>
     </div>
         <div class="d-flex">
     <asp:TextBox ID="txtSearchRoom" runat="server" placeholder="Search by Room Number" CssClass="form-control"></asp:TextBox>
@@ -17,20 +18,15 @@
     <asp:GridView ID="RoomsGridView" runat="server" AutoGenerateColumns="False" DataKeyNames="RoomId"
     OnRowEditing="RoomsGridView_RowEditing" OnRowCancelingEdit="RoomsGridView_RowCancelingEdit"
     OnRowUpdating="RoomsGridView_RowUpdating" OnRowDeleting="RoomsGridView_RowDeleting"
-    OnRowDataBound="RoomsGridView_RowDataBound"
+    OnRowDataBound="RoomsGridView_RowDataBound"  OnRowCommand="RoomsGridView_RowCommand"
     CssClass="table table-bordered table-striped table-hover">
     <Columns>
-            <asp:TemplateField HeaderText="S/N" ItemStyle-Width="50px">
-    <ItemTemplate>
-        <%# Container.DataItemIndex + 1 %>
-    </ItemTemplate>
+    <asp:TemplateField HeaderText="S/N" ItemStyle-Width="50px">
+        <ItemTemplate>
+            <%# Container.DataItemIndex + 1 %>
+        </ItemTemplate>
     </asp:TemplateField>
-        <asp:TemplateField HeaderText="Room Number" SortExpression="RoomNumber">
-            <ItemTemplate>
-                <asp:LinkButton ID="lnkRoomNumber" runat="server" Text='<%# Eval("RoomNumber") %>' 
-                    CommandArgument='<%# Eval("RoomId") %>' OnClick="lnkRoomNumber_Click" />
-            </ItemTemplate>
-        </asp:TemplateField>
+        <asp:BoundField DataField="roomNumber" HeaderText="Room Number" SortExpression="roomNumber" />
         <asp:TemplateField HeaderText="Hostel">
             <ItemTemplate>
                 <asp:Label ID="lblHostelName" runat="server" Text='<%# Eval("Hostel.HostelName") %>'></asp:Label>
@@ -46,10 +42,22 @@
         <asp:BoundField DataField="AvailableBedSpaces" HeaderText="Available Bed Spaces" 
             SortExpression="AvailableBedSpaces" />
         <asp:CheckBoxField DataField="IsAvailable" HeaderText="Available" />
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:LinkButton ID="btnViewDetails" runat="server" CommandName="ViewDetails" 
+                    CommandArgument='<%# Eval("RoomId") %>' Text="View Details" />
+            </ItemTemplate>
+        </asp:TemplateField>
+       
         <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
     </Columns>
     </asp:GridView>
-    
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
+        <asp:Label ID="lblMessage" runat="server" ForeColor="Red" CssClass="error-message" Visible="False"></asp:Label>
+        <asp:Timer ID="ErrorTimer" runat="server" Interval="5000" OnTick="ErrorTimer_Tick" />
+    </ContentTemplate>
+</asp:UpdatePanel>
     <!--Buttons to either Add New Room or to Book Room-->
     <asp:Button ID="btnAddRoom" runat="server" Text="Add New Room" OnClick="btnAddRoom_Click" CssClass="btn btn-outline-primary" />
     <asp:Button ID="btnBookRoom" runat="server" Text="Book Room" OnClick="btnBookRoom_Click" CssClass="btn btn-primary ms-2" />

@@ -7,56 +7,56 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Student_Hostel_and_Room_Booking_System.Room_files
+namespace Student_Hostel_and_Room_Booking_System.Hostel_files
 {
 
 
-    public partial class ViewRoomDetails
+    public partial class ManageHostels
     {
 
         /// <summary>
-        /// lblRoomNumber control.
+        /// txtSearchHostel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRoomNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchHostel;
 
         /// <summary>
-        /// lblBedSpaces control.
+        /// btnSearchHostel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBedSpaces;
+        protected global::System.Web.UI.WebControls.Button btnSearchHostel;
 
         /// <summary>
-        /// lblAvailableBedSpaces control.
+        /// HostelGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAvailableBedSpaces;
+        protected global::System.Web.UI.WebControls.GridView HostelGridView;
 
         /// <summary>
-        /// StudentsGridView control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StudentsGridView;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// btnBackToRooms control.
+        /// btnAddHostel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBackToRooms;
+        protected global::System.Web.UI.WebControls.Button btnAddHostel;
     }
 }

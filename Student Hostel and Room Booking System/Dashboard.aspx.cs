@@ -26,6 +26,7 @@ namespace Student_Hostel_and_Room_Booking_System
 
                         if (RoomCoordinator != null)
                         {
+                            lbluser.Text = RoomCoordinator.Username;
                         }
                         else
                         {

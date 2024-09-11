@@ -20,6 +20,7 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
         }
 
         public virtual DbSet<Bookings> Bookings { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Hostels> Hostels { get; set; }
         public virtual DbSet<RoomCoordinator> RoomCoordinator { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
@@ -58,10 +59,21 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
                     .HasConstraintName("FK__Bookings__Studen__3F466844");
             });
 
+            modelBuilder.Entity<Department>(entity =>
+            {
+                entity.Property(e => e.DepartmentName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
             modelBuilder.Entity<Hostels>(entity =>
             {
                 entity.HasKey(e => e.HostelId)
                     .HasName("PK__Hostels__677EEB280F08782E");
+
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.HostelName)
                     .IsRequired()
@@ -133,6 +145,11 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
                     .HasMaxLength(100);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
+
+                entity.HasOne(d => d.Department)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.DepartmentId)
+                    .HasConstraintName("FK__Students__Depart__4BAC3F29");
             });
 
             OnModelCreatingPartial(modelBuilder);

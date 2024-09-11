@@ -22,7 +22,9 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
         public DateTime? DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Level { get; set; }
+        public int? DepartmentId { get; set; }
 
+        public virtual Department Department { get; set; }
         public virtual ICollection<Bookings> Bookings { get; set; }
     }
 }

@@ -24,13 +24,13 @@ namespace Student_Hostel_and_Room_Booking_System
         protected global::System.Web.UI.WebControls.TextBox txtRoomNumber;
 
         /// <summary>
-        /// ddlHostel control.
+        /// ddlHostels control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHostel;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHostels;
 
         /// <summary>
         /// chkIsAvailable control.
@@ -76,5 +76,41 @@ namespace Student_Hostel_and_Room_Booking_System
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnsave;
+
+        /// <summary>
+        /// btnBackToRooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBackToRooms;
+
+        /// <summary>
+        /// upltimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upltimer;
+
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// tmRedirect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmRedirect;
     }
 }

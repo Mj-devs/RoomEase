@@ -42,6 +42,33 @@ namespace Student_Hostel_and_Room_Booking_System
         protected global::System.Web.UI.WebControls.TextBox txtmatricno;
 
         /// <summary>
+        /// ddlDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartment;
+
+        /// <summary>
+        /// txtdob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtdob;
+
+        /// <summary>
+        /// ddlGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
+
+        /// <summary>
         /// txtphonenumber control.
         /// </summary>
         /// <remarks>
@@ -51,13 +78,13 @@ namespace Student_Hostel_and_Room_Booking_System
         protected global::System.Web.UI.WebControls.TextBox txtphonenumber;
 
         /// <summary>
-        /// txtgender control.
+        /// txtlevel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtgender;
+        protected global::System.Web.UI.WebControls.TextBox txtlevel;
 
         /// <summary>
         /// btnsave control.
@@ -67,15 +94,6 @@ namespace Student_Hostel_and_Room_Booking_System
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnsave;
-
-        /// <summary>
-        /// lbToggleFields control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbToggleFields;
 
         /// <summary>
         /// pnlHiddenFields control.
@@ -112,5 +130,50 @@ namespace Student_Hostel_and_Room_Booking_System
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnsavefresher;
+
+        /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// ErrorTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer ErrorTimer;
+
+        /// <summary>
+        /// lbToggleFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbToggleFields;
+
+        /// <summary>
+        /// btnBackToStudents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBackToStudents;
     }
 }

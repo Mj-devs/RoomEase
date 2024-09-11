@@ -212,7 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Hostel_files\AddHostel.aspx" />
+    <Content Include="Hostel_files\ManageHostels.aspx" />
+    <Content Include="Hostel_files\ViewHostelDetails.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="RoomDashboard.aspx" />
     <Content Include="Room_files\AddRoom.aspx" />
     <Content Include="Room_files\ViewRoomDetails.aspx" />
     <Content Include="Student_Files\AddStudents.aspx" />
@@ -302,6 +306,27 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hostel_files\AddHostel.aspx.cs">
+      <DependentUpon>AddHostel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hostel_files\AddHostel.aspx.designer.cs">
+      <DependentUpon>AddHostel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hostel_files\ManageHostels.aspx.cs">
+      <DependentUpon>ManageHostels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hostel_files\ManageHostels.aspx.designer.cs">
+      <DependentUpon>ManageHostels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hostel_files\ViewHostelDetails.aspx.cs">
+      <DependentUpon>ViewHostelDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hostel_files\ViewHostelDetails.aspx.designer.cs">
+      <DependentUpon>ViewHostelDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,7 +334,15 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Datalayer\Department.cs" />
     <Compile Include="Models\Datalayer\RoomCoordinator.cs" />
+    <Compile Include="RoomDashboard.aspx.cs">
+      <DependentUpon>RoomDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomDashboard.aspx.designer.cs">
+      <DependentUpon>RoomDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Room_files\AddRoom.aspx.cs">
       <DependentUpon>AddRoom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

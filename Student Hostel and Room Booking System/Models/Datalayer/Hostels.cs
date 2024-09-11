@@ -17,6 +17,7 @@ namespace Student_Hostel_and_Room_Booking_System.Models.Datalayer
         public int HostelId { get; set; }
         public string HostelName { get; set; }
         public int? TotalRooms { get; set; }
+        public string Gender { get; set; }
 
         public virtual ICollection<Rooms> Rooms { get; set; }
     }
