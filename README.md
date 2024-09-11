@@ -32,4 +32,4 @@ RoomEase is a comprehensive Student Hostel and Room Management System designed t
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/RoomEase.git
+   git clone https://github.com/Mj-devs/RoomEase.git
